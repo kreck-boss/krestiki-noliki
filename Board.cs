@@ -30,6 +30,29 @@ public sealed class Board
 
     public bool IsFull => cells.Cast<char>().All(cell => cell != ' ');
 
+    public bool HasWinner(char symbol)
+    {
+        var lines = new[]
+        {
+            new[] { 1, 2, 3 }, new[] { 4, 5, 6 }, new[] { 7, 8, 9 },
+            new[] { 1, 4, 7 }, new[] { 2, 5, 8 }, new[] { 3, 6, 9 },
+            new[] { 1, 5, 9 }, new[] { 3, 5, 7 }
+        };
+        return lines.Any(line => line.All(position => GetCell(position) == symbol));
+    }
+
+    public char GetCell(int position)
+    {
+        if (position < 1 || position > Size * Size)
+        {
+            throw new ArgumentOutOfRangeException(nameof(position));
+        }
+
+        var row = (position - 1) / Size;
+        var column = (position - 1) % Size;
+        return cells[row, column];
+    }
+
     public void Reset()
     {
         for (var row = 0; row < Size; row++)
