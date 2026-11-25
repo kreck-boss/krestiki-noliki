@@ -1,2 +1,5 @@
+using KrestikiNoliki;
+
+var board = new Board();
 Console.WriteLine("Крестики-нолики");
-Console.WriteLine("Проект подготовлен. Реализация добавляется по функциональным веткам.");
+board.Render();
