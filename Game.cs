@@ -27,7 +27,19 @@ public sealed class Game
             }
 
             board.Render();
-            break;
+            if (WinChecker.HasWinner(board, currentPlayer))
+            {
+                Console.WriteLine($"Игрок {currentPlayer} победил!");
+                break;
+            }
+
+            if (board.IsFull)
+            {
+                Console.WriteLine("Ничья!");
+                break;
+            }
+
+            currentPlayer = currentPlayer == 'X' ? 'O' : 'X';
         }
     }
 }
